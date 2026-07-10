@@ -26,6 +26,9 @@ export default function LeadForm() {
   const [years, setYears] = useState<number[]>([]);
   const [makes, setMakes] = useState<string[]>([]);
   const [models, setModels] = useState<string[]>([]);
+  const [isLoadingYears, setIsLoadingYears] = useState(true);
+  const [isLoadingMakes, setIsLoadingMakes] = useState(false);
+  const [isLoadingModels, setIsLoadingModels] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -44,12 +47,14 @@ export default function LeadForm() {
   const selectedMake = watch("car_make");
 
   useEffect(() => {
+    setIsLoadingYears(true);
     fetch("/api/vehicles/years")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) setYears(data);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => setIsLoadingYears(false));
   }, []);
 
   useEffect(() => {
@@ -58,12 +63,14 @@ export default function LeadForm() {
       setModels([]);
       setValue("car_make", "");
       setValue("car_model", "");
+      setIsLoadingMakes(true);
       fetch(`/api/vehicles/makes?year=${selectedYear}`)
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data)) setMakes(data);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => console.error(err))
+        .finally(() => setIsLoadingMakes(false));
     }
   }, [selectedYear, setValue]);
 
@@ -71,12 +78,14 @@ export default function LeadForm() {
     if (selectedYear && selectedMake) {
       setModels([]);
       setValue("car_model", "");
+      setIsLoadingModels(true);
       fetch(`/api/vehicles/models?year=${selectedYear}&make=${selectedMake}`)
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data)) setModels(data);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => console.error(err))
+        .finally(() => setIsLoadingModels(false));
     }
   }, [selectedYear, selectedMake, setValue]);
 
@@ -161,48 +170,70 @@ export default function LeadForm() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
             <Label htmlFor="car_year">Year</Label>
-            <select
-              id="car_year"
-              className={`flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${errors.car_year ? "border-red-500" : ""}`}
-              {...register("car_year", { valueAsNumber: true })}
-            >
-              <option value="">Select Year</option>
-              {years.map((year) => (
-                <option key={year} value={year}>{year}</option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                id="car_year"
+                className={`flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${errors.car_year ? "border-red-500" : ""}`}
+                {...register("car_year", { valueAsNumber: true })}
+                disabled={isLoadingYears}
+              >
+                <option value="">Select Year</option>
+                {years.map((year) => (
+                  <option key={year} value={year}>{year}</option>
+                ))}
+              </select>
+              {isLoadingYears && (
+                <div className="absolute inset-y-0 right-8 flex items-center pointer-events-none">
+                  <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
+            </div>
             {errors.car_year && <p className="text-red-500 text-xs mt-1">{errors.car_year.message}</p>}
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="car_make">Make</Label>
-            <select
-              id="car_make"
-              disabled={!selectedYear || makes.length === 0}
-              className={`flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${errors.car_make ? "border-red-500" : ""}`}
-              {...register("car_make")}
-            >
-              <option value="">Select Make</option>
-              {makes.map((make) => (
-                <option key={make} value={make}>{make}</option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                id="car_make"
+                disabled={!selectedYear || makes.length === 0 || isLoadingMakes}
+                className={`flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${errors.car_make ? "border-red-500" : ""}`}
+                {...register("car_make")}
+              >
+                <option value="">Select Make</option>
+                {makes.map((make) => (
+                  <option key={make} value={make}>{make}</option>
+                ))}
+              </select>
+              {isLoadingMakes && (
+                <div className="absolute inset-y-0 right-8 flex items-center pointer-events-none">
+                  <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
+            </div>
             {errors.car_make && <p className="text-red-500 text-xs mt-1">{errors.car_make.message}</p>}
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="car_model">Model</Label>
-            <select
-              id="car_model"
-              disabled={!selectedMake || models.length === 0}
-              className={`flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${errors.car_model ? "border-red-500" : ""}`}
-              {...register("car_model")}
-            >
-              <option value="">Select Model</option>
-              {models.map((model) => (
-                <option key={model} value={model}>{model}</option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                id="car_model"
+                disabled={!selectedMake || models.length === 0 || isLoadingModels}
+                className={`flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${errors.car_model ? "border-red-500" : ""}`}
+                {...register("car_model")}
+              >
+                <option value="">Select Model</option>
+                {models.map((model) => (
+                  <option key={model} value={model}>{model}</option>
+                ))}
+              </select>
+              {isLoadingModels && (
+                <div className="absolute inset-y-0 right-8 flex items-center pointer-events-none">
+                  <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
+            </div>
             {errors.car_model && <p className="text-red-500 text-xs mt-1">{errors.car_model.message}</p>}
           </div>
         </div>
