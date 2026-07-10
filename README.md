@@ -47,11 +47,10 @@ The raw seed script can be found in `prisma/seed.ts`.
 
 ## Trade-offs & Decisions
 
-1. **SQLite vs PostgreSQL (Local Dev):** During local development, the schema was temporarily configured to use SQLite for rapid iteration without needing a Docker container. However, it is fully designed for PostgreSQL as required. You can change `provider = "sqlite"` to `provider = "postgresql"` in `prisma/schema.prisma` before deploying to Vercel/Supabase.
-2. **Component Library:** I opted to use standard HTML inputs wrapped in React Hook Form instead of the heavily abstracted `shadcn/ui` Form wrapper. This reduces DOM bloat, minimizes client-side JavaScript, and makes the component significantly easier to read and maintain, while still leveraging shadcn's atomic UI elements (Input, Label, Button).
-3. **API Design:** Instead of relying entirely on React Server Actions, I built RESTful API Route Handlers (`/api/vehicles/*`). This allows the frontend to be completely decoupled and enables easy caching of static vehicle data at the CDN level if needed in the future.
-4. **State Management:** Simple React `useState` and `useEffect` were sufficient for cascading dropdowns. I avoided adding heavier caching libraries like React Query to keep the bundle size small, meeting the strict `<150KB` performance requirement.
-5. **Debouncing:** I used a simple disabled state on the submit button to prevent duplicate rapid-fire submissions. With more time, I would implement a strict rate-limiter on the `/api/leads` route using Redis (Upstash) to prevent abuse.
+1. **Component Library:** I opted to use standard HTML inputs wrapped in React Hook Form instead of the heavily abstracted `shadcn/ui` Form wrapper. This reduces DOM bloat, minimizes client-side JavaScript, and makes the component significantly easier to read and maintain, while still leveraging shadcn's atomic UI elements (Input, Label, Button).
+2. **API Design:** Instead of relying entirely on React Server Actions, I built RESTful API Route Handlers (`/api/vehicles/*`). This allows the frontend to be completely decoupled and enables easy caching of static vehicle data at the CDN level if needed in the future.
+3. **State Management:** Simple React `useState` and `useEffect` were sufficient for cascading dropdowns. I avoided adding heavier caching libraries like React Query to keep the bundle size small, meeting the strict `<150KB` performance requirement.
+4. **Debouncing:** I used a simple disabled state on the submit button to prevent duplicate rapid-fire submissions. With more time, I would implement a strict rate-limiter on the `/api/leads` route using Redis (Upstash) to prevent abuse.
 
 ## Lighthouse & Performance
 See [PERFORMANCE.md](./PERFORMANCE.md) for detailed web vitals and Lighthouse scores.

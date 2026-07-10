@@ -43,7 +43,8 @@ async function main() {
     }
   }
 
-  // Use createMany for bulk insertion to avoid making 1200 roundtrips to the DB.
+  // await prisma.vehicle.deleteMany()
+
   const result = await prisma.vehicle.createMany({
     data: vehiclesData
   })

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ShieldDrive Insurance",
     description: "Get a free auto insurance quote in minutes.",
-    url: "https://shielddrive.vercel.app",
+    url: "https://shield-drive-bdm.vercel.app",
     siteName: "ShieldDrive Insurance",
     images: [
       {

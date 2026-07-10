@@ -106,7 +106,7 @@ export default function LeadForm() {
 
   if (isSuccess) {
     return (
-      <div className="flex flex-col items-center justify-center space-y-4 p-8 bg-white/50 backdrop-blur-md rounded-2xl shadow-xl border border-white/20">
+      <div className="flex flex-col items-center justify-center space-y-4 p-8 bg-white rounded-xl shadow-lg border border-slate-200">
         <div className="h-16 w-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
         </div>
@@ -118,7 +118,7 @@ export default function LeadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white/70 backdrop-blur-xl p-8 rounded-2xl shadow-2xl border border-white/50">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-xl shadow-lg border border-slate-200">
       <div className="space-y-2">
         <h2 className="text-2xl font-bold text-gray-900">Get Your Free Quote</h2>
         <p className="text-gray-500 text-sm">Fill out the form below to see how much you could save.</p>
@@ -208,7 +208,7 @@ export default function LeadForm() {
         </div>
       </div>
 
-      <Button type="submit" className="w-full h-12 text-lg font-medium bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl" disabled={isSubmitting}>
+      <Button type="submit" className="w-full h-12 text-lg font-medium bg-blue-600 hover:bg-blue-700 text-white transition-colors" disabled={isSubmitting}>
         {isSubmitting ? "Submitting..." : "Get My Quote"}
       </Button>
     </form>
