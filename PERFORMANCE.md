@@ -1,6 +1,7 @@
 # ShieldDrive Insurance - Performance Report
 
 ## Lighthouse Scores (Mobile)
+<img width="1918" height="1017" alt="image" src="https://github.com/user-attachments/assets/d2f554b3-a07e-42f6-a05d-daa5ca949b06" />
 
 
 - **Performance**: 97
