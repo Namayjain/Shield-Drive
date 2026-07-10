@@ -1,3 +1,4 @@
+import Navbar from "@/components/navbar";
 import LeadForm from "@/components/lead-form";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -6,27 +7,7 @@ import { CheckCircle2, Shield, Clock, Star } from "lucide-react";
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50 selection:bg-blue-200">
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 md:h-20 items-center">
-            <div className="flex-shrink-0 flex items-center gap-2 md:gap-3">
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-blue-700 flex items-center justify-center shadow-sm">
-                <Shield className="w-5 h-5 md:w-6 md:h-6 text-white" />
-              </div>
-              <span className="font-bold text-xl md:text-2xl text-slate-900 tracking-tight">ShieldDrive</span>
-            </div>
-            <nav className="hidden md:flex gap-8 items-center">
-              <span className="text-sm font-medium text-slate-600 hover:text-blue-700 cursor-pointer transition-colors">Insurance Products</span>
-              <span className="text-sm font-medium text-slate-600 hover:text-blue-700 cursor-pointer transition-colors">Claims</span>
-              <span className="text-sm font-medium text-slate-600 hover:text-blue-700 cursor-pointer transition-colors">About Us</span>
-              <div className="flex items-center gap-2 text-sm font-bold text-blue-700 bg-blue-50 px-4 py-2 rounded-full">
-                <span>Support:</span>
-                <span>1-800-555-0199</span>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       <div className="bg-[#0f172a] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
