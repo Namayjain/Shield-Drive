@@ -53,5 +53,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 3. **State Management:** Simple React `useState` and `useEffect` were sufficient for cascading dropdowns. I avoided adding heavier caching libraries like React Query to keep the bundle size small, meeting the strict `<150KB` initial load requirement.
 4. **UX & Rate Limiting:** I used simple disabled states and graceful loading spinners on the form inputs to handle asynchronous fetches cleanly without causing layout shifts (0 CLS). With more time, I would implement a strict rate-limiter on the `/api/leads` route using Redis to prevent API abuse.
 
+## DB Design and the logical relationship
+<img width="460" height="348" alt="image" src="https://github.com/user-attachments/assets/fa2497b5-bf74-484c-b0d8-61e94651fe29" />
+
+<img width="231" height="385" alt="image" src="https://github.com/user-attachments/assets/60c42ca4-fe6a-465f-9b5e-de37f29b1c6a" />
+
+
 ## Lighthouse & Performance
 See [PERFORMANCE.md](./PERFORMANCE.md) for detailed web vitals and Lighthouse scores.
