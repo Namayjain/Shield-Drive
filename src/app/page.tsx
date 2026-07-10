@@ -112,7 +112,7 @@ export default function Home() {
               <CardContent>
                 <div className="flex items-center gap-3">
                   <Avatar>
-                    <AvatarFallback>SJ</AvatarFallback>
+                    <AvatarFallback className="text-slate-900 bg-slate-200">SJ</AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="text-sm font-semibold text-slate-900">Sarah Jenkins</p>
@@ -134,7 +134,7 @@ export default function Home() {
               <CardContent>
                 <div className="flex items-center gap-3">
                   <Avatar>
-                    <AvatarFallback>MR</AvatarFallback>
+                    <AvatarFallback className="text-slate-900 bg-slate-200">MR</AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="text-sm font-semibold text-slate-900">Michael Rodriguez</p>
@@ -156,7 +156,7 @@ export default function Home() {
               <CardContent>
                 <div className="flex items-center gap-3">
                   <Avatar>
-                    <AvatarFallback>EC</AvatarFallback>
+                    <AvatarFallback className="text-slate-900 bg-slate-200">EC</AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="text-sm font-semibold text-slate-900">Emily Chen</p>
@@ -198,7 +198,7 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="text-center pt-8 border-t border-slate-800 text-slate-500 text-xs">
+          <div className="text-center pt-8 border-t border-slate-800 text-slate-400 text-xs">
             <p className="mb-2">© {new Date().getFullYear()} ShieldDrive Insurance. All rights reserved.</p>
             <p className="max-w-3xl mx-auto">
               Coverage subject to policy terms, conditions, and availability. Savings claim based on national average of new customers who reported savings in 2025 comparing their previous premium to their new ShieldDrive premium.
