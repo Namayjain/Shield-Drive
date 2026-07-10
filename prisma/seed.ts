@@ -45,8 +45,7 @@ async function main() {
 
   // Use createMany for bulk insertion to avoid making 1200 roundtrips to the DB.
   const result = await prisma.vehicle.createMany({
-    data: vehiclesData,
-    skipDuplicates: true,
+    data: vehiclesData
   })
 
   console.log(`Seeded ${result.count} new vehicles successfully.`)

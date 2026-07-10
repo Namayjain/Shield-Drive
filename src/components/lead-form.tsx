@@ -127,19 +127,19 @@ export default function LeadForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="first_name">First Name</Label>
-          <Input id="first_name" placeholder="John" {...register("first_name")} className={errors.first_name ? "border-red-500" : ""} />
+          <Input id="first_name" placeholder="Namay" {...register("first_name")} className={errors.first_name ? "border-red-500" : ""} />
           {errors.first_name && <p className="text-red-500 text-xs mt-1">{errors.first_name.message}</p>}
         </div>
         <div className="space-y-2">
           <Label htmlFor="last_name">Last Name</Label>
-          <Input id="last_name" placeholder="Doe" {...register("last_name")} className={errors.last_name ? "border-red-500" : ""} />
+          <Input id="last_name" placeholder="Jain" {...register("last_name")} className={errors.last_name ? "border-red-500" : ""} />
           {errors.last_name && <p className="text-red-500 text-xs mt-1">{errors.last_name.message}</p>}
         </div>
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" placeholder="john@example.com" {...register("email")} className={errors.email ? "border-red-500" : ""} />
+        <Input id="email" type="email" placeholder="namay@example.com" {...register("email")} className={errors.email ? "border-red-500" : ""} />
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
       </div>
 
