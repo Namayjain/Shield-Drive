@@ -13,8 +13,9 @@ export async function GET(request: Request) {
     }
 
     const year = parseInt(yearParam, 10);
-    if (isNaN(year)) {
-      return NextResponse.json({ error: 'Invalid year' }, { status: 400 });
+    const currentYear = new Date().getFullYear();
+    if (isNaN(year) || year < 1900 || year > currentYear + 1) {
+      return NextResponse.json({ error: 'Invalid year range' }, { status: 400 });
     }
 
     const makes = await prisma.vehicle.findMany({

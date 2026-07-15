@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 const leadSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
   last_name: z.string().min(1, "Last name is required"),
-  email: z.string().email("Invalid email format"),
+  email: z.email("Invalid email format"),
   phone: z.string().regex(/^\+?1?\s*\(?-*\.*(\d{3})\)?\.*-*\s*(\d{3})\.*-*\s*(\d{4})$/, "Invalid US phone number"),
   zip_code: z.string().regex(/^\d{5}$/, "ZIP code must be 5 digits"),
   car_year: z.number().int(),
