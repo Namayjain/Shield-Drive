@@ -155,12 +155,25 @@ export default function LeadForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="phone">Phone Number</Label>
-          <Input id="phone" type="tel" placeholder="(555) 123-4567" {...register("phone")} className={errors.phone ? "border-red-500" : ""} />
+          <Input 
+            id="phone" 
+            type="tel" 
+            placeholder="(555) 123-4567" 
+            {...register("phone")} 
+            onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9\+\-\(\)\s]/g, '') }}
+            className={errors.phone ? "border-red-500" : ""} 
+          />
           {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
         </div>
         <div className="space-y-2">
           <Label htmlFor="zip_code">ZIP Code</Label>
-          <Input id="zip_code" placeholder="12345" {...register("zip_code")} className={errors.zip_code ? "border-red-500" : ""} />
+          <Input 
+            id="zip_code" 
+            placeholder="12345" 
+            {...register("zip_code")} 
+            onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '') }}
+            className={errors.zip_code ? "border-red-500" : ""} 
+          />
           {errors.zip_code && <p className="text-red-500 text-xs mt-1">{errors.zip_code.message}</p>}
         </div>
       </div>
